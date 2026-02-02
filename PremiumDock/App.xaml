@@ -1,0 +1,20 @@
+<Application x:Class="PremiumDock.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+  <Application.Resources>
+    <ResourceDictionary>
+      <Color x:Key="DockBackground">#141722</Color>
+      <Color x:Key="DockAccent">#8E9CFF</Color>
+      <Color x:Key="DockGlow">#3347FF</Color>
+      <SolidColorBrush x:Key="DockBackgroundBrush" Color="{StaticResource DockBackground}" />
+      <SolidColorBrush x:Key="DockAccentBrush" Color="{StaticResource DockAccent}" />
+      <SolidColorBrush x:Key="DockGlowBrush" Color="{StaticResource DockGlow}" />
+
+      <Style TargetType="TextBlock" x:Key="CaptionStyle">
+        <Setter Property="Foreground" Value="#C6C9D5" />
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
