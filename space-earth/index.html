@@ -1,135 +1,63 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Космос та обертання Землі</title>
-  <style>
-    :root {
-      --earth-size: min(60vmin, 420px);
-      --earth-tilt: 23.5deg;
-      --spin-duration: 40s;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      color: #ffffff;
-      background: #02030a;
-      overflow: hidden;
-    }
-
-    .scene {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 45%),
-        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.08), transparent 35%),
-        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.12), transparent 40%),
-        url("https://images-assets.nasa.gov/image/PIA12235/PIA12235~orig.jpg") center/cover no-repeat;
-    }
-
-    .stars {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.9), transparent 50%),
-        radial-gradient(1px 1px at 25% 70%, rgba(255, 255, 255, 0.7), transparent 50%),
-        radial-gradient(1.5px 1.5px at 40% 35%, rgba(255, 255, 255, 0.8), transparent 50%),
-        radial-gradient(1px 1px at 55% 60%, rgba(255, 255, 255, 0.6), transparent 50%),
-        radial-gradient(1.2px 1.2px at 80% 30%, rgba(255, 255, 255, 0.85), transparent 50%),
-        radial-gradient(1px 1px at 90% 80%, rgba(255, 255, 255, 0.65), transparent 50%);
-      opacity: 0.7;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .earth-wrapper {
-      position: relative;
-      width: var(--earth-size);
-      height: var(--earth-size);
-      transform: rotateX(var(--earth-tilt));
-      filter: drop-shadow(0 0 40px rgba(34, 93, 188, 0.55))
-        drop-shadow(0 0 120px rgba(31, 115, 255, 0.35));
-    }
-
-    .earth {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background-image: url("https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57730/land_ocean_ice_cloud_2048.jpg");
-      background-size: cover;
-      background-repeat: repeat-x;
-      animation: spin var(--spin-duration) linear infinite;
-      box-shadow:
-        inset -40px -30px 60px rgba(0, 0, 0, 0.8),
-        inset 20px 10px 40px rgba(255, 255, 255, 0.15);
-    }
-
-    .earth::after {
-      content: "";
-      position: absolute;
-      inset: -3%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(127, 187, 255, 0.45), transparent 60%);
-      box-shadow: 0 0 20px rgba(61, 158, 255, 0.6);
-      pointer-events: none;
-    }
-
-    .earth-shadow {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle at 60% 50%, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9) 70%);
-      mix-blend-mode: multiply;
-    }
-
-    .caption {
-      position: absolute;
-      bottom: 40px;
-      text-align: center;
-      width: 100%;
-      font-size: clamp(1rem, 2.2vw, 1.4rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-    }
-
-    @keyframes spin {
-      from {
-        background-position: 0 50%;
-      }
-      to {
-        background-position: -200% 50%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .earth {
-        animation-duration: 120s;
-      }
-    }
-  </style>
-</head>
-<body>
-  <main class="scene">
-    <div class="stars" aria-hidden="true"></div>
-    <div class="earth-wrapper" aria-label="Планета Земля повільно обертається">
-      <div class="earth"></div>
-      <div class="earth-shadow"></div>
+<div style="font-family: 'Segoe UI', Tahoma, Arial, sans-serif; color: #0f1c2e; background: linear-gradient(135deg, #f5f7ff 0%, #eef4ff 55%, #ffffff 100%); padding: 28px; border-radius: 18px; box-shadow: 0 16px 38px rgba(20, 45, 90, 0.16); max-width: 1100px; margin: 12px auto;">
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px;">
+    <div style="flex: 1 1 320px;">
+      <div style="display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; background: #0c5bd6; color: #fff; border-radius: 999px; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;">
+        Premium • Confluence Inline
+      </div>
+      <h2 style="margin: 16px 0 10px; font-size: 28px; line-height: 1.2;">Active Directory Federation Services (ADFS)</h2>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #22324b;">
+        ADFS забезпечує автоматизовану ідентифікацію користувача та інтеграцію браузера із системою Windows для доменних облікових записів. Сервіс маркерів доступу відповідає за автентифікацію та зберігання даних користувача в зашифрованому вигляді.
+      </p>
     </div>
-    <div class="caption">Наша планета у безмежному космосі</div>
-  </main>
-</body>
-</html>
+    <div style="flex: 1 1 320px; background: #ffffff; padding: 18px; border-radius: 16px; border: 1px solid #e0e7ff; box-shadow: 0 12px 30px rgba(24, 61, 122, 0.12);">
+      <div style="font-size: 13px; font-weight: 600; color: #0c5bd6; margin-bottom: 12px;">Візуалізація процесу</div>
+      <img
+        src="https://confluence.fuib.com/download/attachments/91950736/image2021-9-22_14-50-1.png?version=1&modificationDate=1632311402054&api=v2"
+        alt="Схема авторизації ADFS"
+        style="width: 100%; border-radius: 12px; border: 1px solid #e6edff; box-shadow: 0 10px 26px rgba(15, 50, 110, 0.15);"
+      />
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px;">
+    <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 1px solid #e2e9ff;">
+      <div style="font-size: 13px; font-weight: 700; color: #0c5bd6; margin-bottom: 6px;">Вбудована автентифікація</div>
+      <div style="font-size: 14px; line-height: 1.5;">Підтримка Integrated Windows Authentication для безшовного входу без участі користувача.</div>
+    </div>
+    <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 1px solid #e2e9ff;">
+      <div style="font-size: 13px; font-weight: 700; color: #0c5bd6; margin-bottom: 6px;">Безпечні дані</div>
+      <div style="font-size: 14px; line-height: 1.5;">Дані користувача зберігаються у зашифрованому вигляді та передаються для авторизації лише за потреби.</div>
+    </div>
+    <div style="background: #ffffff; padding: 18px; border-radius: 14px; border: 1px solid #e2e9ff;">
+      <div style="font-size: 13px; font-weight: 700; color: #0c5bd6; margin-bottom: 6px;">Сервер федерації</div>
+      <div style="font-size: 14px; line-height: 1.5;">Генерує сертифікати автентифікації та перетворює заявки для ресурсних серверів.</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 28px; padding: 20px; background: #0d1b3a; border-radius: 16px; color: #f5f7ff;">
+    <div style="font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: #8fb4ff;">Алгоритм авторизації</div>
+    <ol style="margin: 16px 0 0; padding-left: 20px; line-height: 1.7; font-size: 14px;">
+      <li>Користувач звертається до веб-сервера, ADFS-агент перенаправляє на сервер федерації постачальника ресурсів.</li>
+      <li>Відбувається виявлення домашньої області: користувач надає домен або email для визначення постачальника посвідчення.</li>
+      <li>Сервер федерації ресурсів перенаправляє браузер на сервер федерації постачальника посвідчення.</li>
+      <li>Користувач проходить автентифікацію з AD-обліковим записом.</li>
+      <li>Після успішної перевірки створюється cookie-файл автентифікації та маркер безпеки ADFS.</li>
+      <li>Маркер та cookie повертаються на сервер федерації ресурсів для трансформації заявок.</li>
+      <li>Сервер федерації ресурсів формує новий маркер та передає його до ADFS-агента веб-застосунку.</li>
+      <li>Веб-додаток інтерпретує заявки та надає користувачу веб-матеріали.</li>
+    </ol>
+  </div>
+
+  <div style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+    <div style="flex: 1 1 320px; padding: 16px; background: #ffffff; border-radius: 14px; border: 1px solid #e2e9ff;">
+      <div style="font-weight: 600; margin-bottom: 8px;">Домашній домен</div>
+      <div style="font-size: 14px; line-height: 1.6;">Місце, де визначено та обслуговується посвідчення користувача (наприклад, fuib.com).</div>
+    </div>
+    <div style="flex: 1 1 320px; padding: 16px; background: #ffffff; border-radius: 14px; border: 1px solid #e2e9ff;">
+      <div style="font-weight: 600; margin-bottom: 8px;">Результат</div>
+      <div style="font-size: 14px; line-height: 1.6;">
+        Безпечний та швидкий спосіб авторизуватися «в один клік». Всі операції відбуваються автоматично та без участі користувача.
+      </div>
+    </div>
+  </div>
+</div>
