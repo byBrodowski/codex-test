@@ -3,19 +3,51 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:PremiumDock"
         Title="Premium Dock"
-        Height="120"
-        Width="720"
+        Height="140"
+        Width="760"
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
         Topmost="True"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        ResizeMode="NoResize">
   <Window.Resources>
     <DropShadowEffect x:Key="PanelShadow"
                       BlurRadius="24"
                       ShadowDepth="0"
                       Opacity="0.35"
                       Color="#4D5A7A" />
+    <DropShadowEffect x:Key="IconShadow"
+                      BlurRadius="12"
+                      ShadowDepth="0"
+                      Opacity="0.25"
+                      Color="#94A3B8" />
+    <LinearGradientBrush x:Key="DropGradient" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Color="#F0F9FF" Offset="0" />
+      <GradientStop Color="#E0F2FE" Offset="0.5" />
+      <GradientStop Color="#DBEAFE" Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="DropBorderBrush" Color="#7DD3FC" />
+    <Style TargetType="Border" x:Key="DockShellStyle">
+      <Setter Property="Background" Value="{StaticResource PanelGradient}" />
+      <Setter Property="BorderBrush" Value="#40FFFFFF" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsDropActive}" Value="True">
+          <Setter Property="Background" Value="{StaticResource DropGradient}" />
+          <Setter Property="BorderBrush" Value="{StaticResource DropBorderBrush}" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+    <Style TargetType="TextBlock" x:Key="SubtitleStyle">
+      <Setter Property="Text" Value="Перетягніть сюди іконки, ярлики або папки" />
+      <Setter Property="Foreground" Value="#64748B" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding IsDropActive}" Value="True">
+          <Setter Property="Text" Value="Відпустіть, щоб додати до доку" />
+          <Setter Property="Foreground" Value="#0284C7" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
     <Style TargetType="Button" x:Key="IconButton">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="BorderThickness" Value="0" />
@@ -23,12 +55,21 @@
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Button">
-            <Border CornerRadius="12" Background="Transparent">
+            <Border x:Name="Root" CornerRadius="14" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+              <Border.RenderTransform>
+                <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
+              </Border.RenderTransform>
               <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
             </Border>
             <ControlTemplate.Triggers>
               <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#11FFFFFF" />
+                <Setter TargetName="Root" Property="Background" Value="#16FFFFFF" />
+                <Setter TargetName="Scale" Property="ScaleX" Value="1.05" />
+                <Setter TargetName="Scale" Property="ScaleY" Value="1.05" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Scale" Property="ScaleX" Value="0.98" />
+                <Setter TargetName="Scale" Property="ScaleY" Value="0.98" />
               </Trigger>
             </ControlTemplate.Triggers>
           </ControlTemplate>
@@ -38,40 +79,43 @@
   </Window.Resources>
 
   <Border Margin="16"
-          CornerRadius="24"
-          Background="{StaticResource PanelGradient}"
+          CornerRadius="26"
           Opacity="0.98"
           Effect="{StaticResource PanelShadow}">
-    <Border BorderThickness="1" BorderBrush="#40FFFFFF" CornerRadius="24">
-      <Grid Margin="16">
-        <StackPanel>
-          <TextBlock Text="Premium Dock" FontSize="16" FontWeight="SemiBold" Foreground="#334155" />
-          <TextBlock Text="Перетягніть сюди іконки або ярлики" FontSize="12" Foreground="#64748B" Margin="0,4,0,12" />
-          <ItemsControl ItemsSource="{Binding DockItems}">
-            <ItemsControl.ItemsPanel>
-              <ItemsPanelTemplate>
-                <WrapPanel />
-              </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-              <DataTemplate DataType="{x:Type local:DockItem}">
-                <Button Style="{StaticResource IconButton}" ToolTip="{Binding DisplayName}" Click="OnDockItemClick">
-                  <StackPanel Width="72" HorizontalAlignment="Center">
-                    <Border Width="48" Height="48" CornerRadius="12" Background="#F8FAFC">
-                      <Image Width="32" Height="32" Source="{Binding Icon}" Stretch="Uniform" />
-                    </Border>
-                    <TextBlock Text="{Binding DisplayName}"
-                               FontSize="11"
-                               Foreground="#475569"
-                               TextAlignment="Center"
-                               TextTrimming="CharacterEllipsis"
-                               Margin="0,6,0,0" />
-                  </StackPanel>
-                </Button>
-              </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
+    <Border BorderThickness="1" CornerRadius="26" Style="{StaticResource DockShellStyle}">
+      <Grid Margin="18">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,0,10">
+          <TextBlock Text="Premium Dock" FontSize="16" FontWeight="SemiBold" Foreground="#1E293B" />
+          <TextBlock FontSize="12" Margin="0,4,0,0" Style="{StaticResource SubtitleStyle}" />
         </StackPanel>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding DockItems}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type local:DockItem}">
+              <Button Style="{StaticResource IconButton}" ToolTip="{Binding DisplayName}" Click="OnDockItemClick">
+                <StackPanel Width="72" HorizontalAlignment="Center">
+                  <Border Width="48" Height="48" CornerRadius="14" Background="#F8FAFC" Effect="{StaticResource IconShadow}">
+                    <Image Width="32" Height="32" Source="{Binding Icon}" Stretch="Uniform" />
+                  </Border>
+                  <TextBlock Text="{Binding DisplayName}"
+                             FontSize="11"
+                             Foreground="#475569"
+                             TextAlignment="Center"
+                             TextTrimming="CharacterEllipsis"
+                             Margin="0,6,0,0" />
+                </StackPanel>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
       </Grid>
     </Border>
   </Border>
